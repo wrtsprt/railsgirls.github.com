@@ -1,10 +1,10 @@
 ---
 layout: default
 title: Rails Girls App Tutorial - the other way around
-permalink: app-top-bottom
+permalink: app-top-down
 ---
 
-# Rails Girls App Tutorial - Top Bottom
+# Rails Girls App Tutorial - Top Down
 
 *Created by RailsGirls Brussels*
 
@@ -15,64 +15,53 @@ permalink: app-top-bottom
 
 Should we keep that?
 
-
 ### Important
 
-It is important that you select the instructions specific to your operating system - the commands you need to run on a Windows computer are slightly different to Mac or Linux. If you're having trouble check the Operating System switcher at the bottom of the commands. In case you're using a cloud service (e.g. nitrous), you need to run the Linux commands even if you are on a Windows computer.
+It is important that you select the instructions specific to your operating system - the commands you need to run on a Windows computer are slightly different to Mac or Linux. If you're having trouble check the Operating System switcher at the bottom of the commands. 
 
 ## *1.*Getting you started
 
 In order to save time in the beginning and get right to the good stuff, you'll download a tiny app that we prepared for you.
 (You can recreate it yourself if you want. We explain how to do it in the README). Just click this ???LINK??? and save the
-file to computer. Move it into your Documents (??? how precise, windows vs. linux ...) and extract the archive.
-
-??? how to make this most easy on all paltforms????
-  * downlaod move to documents (windows, linux? )
-  * or create projects folder move it there?
-  * move it with the command line, or with a graphic tool?
+file to computer. 
 
 Now, let's open a terminal:
 
 * Mac OS X: Open Spotlight, type *Terminal* and click the *Terminal* application.
 * Windows: Click Start and look for *Command Prompt*, then click *Command Prompt with Ruby on Rails*.
 * Linux (Ubuntu/Fedora): Search for *Terminal* on the dash and click *Terminal*.
-* Cloud service (e.g. nitrous): Log in to your account, start your box and switch to its IDE (see [installation guide](/install#using-a-cloud-service) for details). The terminal is usually at the bottom of your browser window.
 
-Next, type these commands in the terminal:
+Next, let's find the app in the terminal by running these commands:
 
 <div class="os-specific">
   <div class="nix">
 {% highlight sh %}
-mkdir projects
+cd Downloads
+cd railsgirls-app
 {% endhighlight %}
 
     <div>
-<p>You can verify that a directory named <code>projects</code> was created by running the list command: <code>ls</code>. You should see the <code>projects</code> directory in the output. Now you want to change the directory you are currently in to the <code>projects</code> folder by running:</p>
+<p>You can verify that you landed in the correct directory by with the <code>ls</code> command. Running it should give you a result similar to the following:</p>
     </div>
-
-{% highlight sh %}
-cd projects
-{% endhighlight %}
+	{% highlight sh %}
+	??? rails app default directory listing ??? 
+	{% endhighlight %}
 
     <div>
-<p>You can verify that the app you just downloaded is there again with the <code>ls</code> command. Change into the apps directory.</p>
+<p>Should that not be the case ask your guide to point you to the correct directory.</p>
+
+<p>Now we can prepare the app and start the server as follows:</p>
     </div>
 
 {% highlight sh %}
-cd ???todo-app???
-{% endhighlight %}
-
-    <div>
-<p>If you run <code>ls</code> inside of the directory you should see folders such as <code>app</code> and <code>config</code>. You can then start the rails server by running:</p>
-    </div>
-
-{% highlight sh %}
+bundle install???
+rake db:setup???
 rails server
 {% endhighlight %}
   </div>
 
   <div class="win">
-<!-- ??? update windows paragraph accordingly, once we're done wit hthe first -->
+<!-- ??? update windows paragraph accordingly, once we're done with the *nix version -->
 {% highlight sh %}
 mkdir projects
 {% endhighlight %}
@@ -111,9 +100,44 @@ rails server
   </div>
 </div>
 
-(??? cloud service, should we support that?) Open <http://localhost:3000> in your browser. If you are using a cloud service (e.g. nitrous), use its preview functionality instead (see [installation guide](/install#using-a-cloud-service) for details).
+Open <http://localhost:3000> in your browser. 
 
-You should see "My todo's" page, which means that the generation of your new app worked correctly.
+You should see "Welcome friend." page, which means your app is up and running.
+
+??? Should we do a little, what does it look like when the server is not running exercise here ???
+
+## *2.*Creating a static HTML page
+
+The welcome page you have just seen is a great example of a static HTML page served by a web server and then downloaded and displayed by your web browser. You will now see what such a page looks like in its raw form and learn how to make and change one. 
+
+Open the file `app/views/welcome/index.html.erb` in your text editor. What you see here is mostly the text you find on the web page. But it is filled with a couple of special words and characters. Those are called HTML tags and markup the text to tell the browser how it should layout and show the page and contained text. 
+
+Open your browser again and inspect the source code of the web page (??? instructions per OS / browser). Compare the what you see in the browser with what you see in your editor. What do you realise? Discuss with your peers and coach.
+
+**Coach:** Discuss the findings.
+
+Now let's change something in the HTML of the page. Go back to your editor for that and add ??? \<good idea here\>. Be sure to save the file in your editor, head over to the browser and reload the page. 
+
+## *3.*From static to dynamic
+
+
+## *4.*Advanced: MVC
+## *5.*Advanced: Ruby in the Rails console 
+
+
+## *6+.*What next?
+
+* Add design using HTML &amp; CSS
+* Add ratings
+* Use CoffeeScript (or JavaScript) to add interaction
+* Add picture resizing to make loading the pictures faster
+
+
+## Where to go from here? 
+
+
+
+# Stuff removed from the original guide, that we might reuse in a different order
 
 Notice in this window the command prompt is not visible because you are now in the Rails server, the command prompt looks like this:
 
@@ -135,270 +159,3 @@ When the command prompt is not visible you cannot execute new commands. If you t
 Hit `CTRL-C` in the terminal to quit the server.
 
 **Coach:** Explain what each command does. What was generated? What does the server do?
-
-
-## *2.*Create Idea scaffold
-
-We're going to use Rails' scaffold functionality to generate a starting point that allows us to list, add, remove, edit, and view things; in our case ideas.
-
-**Coach:** What is Rails scaffolding? (Explain the command, the model name and related database table, naming conventions, attributes and types, etc.) What are migrations and why do you need them?
-
-{% highlight sh %}
-rails generate scaffold idea name:string description:text picture:string
-{% endhighlight %}
-
-The scaffold creates new files in your project directory, but to get it to work properly we need to run a couple of other commands to update our database and restart the server.
-
-<div class="os-specific">
-  <div class="nix">
-{% highlight sh %}
-bin/rake db:migrate
-rails server
-{% endhighlight %}
-  </div>
-
-  <div class="win">
-{% highlight sh %}
-ruby bin/rake db:migrate
-rails server
-{% endhighlight %}
-  </div>
-</div>
-
-Open <http://localhost:3000/ideas> in your browser. Cloud service (e.g. nitrous) users need to append '/ideas' to their preview url instead (see [installation guide](/install#using-a-cloud-service)).
-
-Click around and test what you got by running these few command-line commands.
-
-Hit `CTRL-C` to quit the server again when you've clicked around a little.
-
-
-## *3.*Design
-
-**Coach:** Talk about the relationship between HTML and Rails. What part of views is HTML and what is Embedded Ruby (ERB)? What is MVC and how does this relate to it? (Models and controllers are responsible for generating the HTML views.)
-
-The app doesn't look very nice yet. Let's do something about that. We'll use the Twitter Bootstrap project to give us nicer styling really easily.
-
-Open `app/views/layouts/application.html.erb` in your text editor and above the line
-
-{% highlight erb %}
-<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-{% endhighlight %}
-
-add
-
-{% highlight erb %}
-<link rel="stylesheet" href="//railsgirls.com/assets/bootstrap.css">
-<link rel="stylesheet" href="//railsgirls.com/assets/bootstrap-theme.css">
-{% endhighlight %}
-
-and replace
-
-{% highlight erb %}
-<%= yield %>
-{% endhighlight %}
-
-with
-
-{% highlight erb %}
-<div class="container">
-  <%= yield %>
-</div>
-{% endhighlight %}
-
-Let's also add a navigation bar and footer to the layout. In the same file, under `<body>` add
-
-{% highlight html %}
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">The Idea app</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/ideas">Ideas</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-{% endhighlight %}
-
-and before `</body>` add
-
-{% highlight html %}
-<footer>
-  <div class="container">
-    Rails Girls 2014
-  </div>
-</footer>
-<script src="//railsgirls.com/assets/bootstrap.js"></script>
-{% endhighlight %}
-
-Now let's also change the styling of the ideas table. Open `app/assets/stylesheets/application.css` and at the bottom add
-
-{% highlight css %}
-body { padding-top: 100px; }
-footer { margin-top: 100px; }
-table, td, th { vertical-align: middle; border: none; }
-th { border-bottom: 1px solid #DDD; }
-{% endhighlight %}
-
-Now make sure you saved your files and refresh the browser to see what was changed. You can also change the HTML & CSS further.
-
-In case your Terminal shows you an error message that *sort of* implies there is something wrong with your JavaScript or CoffeeScript, install [nodejs](http://nodejs.org/download/). This issue should not appear when you've used the RailsInstaller (but when you've installed Rails via ```gem install rails```).
-
-**Coach:** Talk a little about CSS and layouts.
-
-
-## *4.*Adding picture uploads
-
-We need to install a piece of software to let us upload files in Rails.
-
-Open `Gemfile` in the project directory using your text editor and under the line
-
-{% highlight ruby %}
-gem 'sqlite3'
-{% endhighlight %}
-
-add
-
-{% highlight ruby %}
-gem 'carrierwave'
-{% endhighlight %}
-
-**Coach:** Explain what libraries are and why they are useful. Describe what open source software is.
-
-In the terminal run:
-
-{% highlight sh %}
-bundle
-{% endhighlight %}
-
-Now we can generate the code for handling uploads. In the terminal run:
-
-{% highlight sh %}
-rails generate uploader Picture
-{% endhighlight %}
-
-At this point you need to **restart the Rails server process** in the terminal.
-
-Hit `CTRL-C` in the terminal to quit the server. Once it has stopped, you can press the up arrow to get to the last command entered, then hit enter to start the server again.
-
-This is needed for the app to load the added library.
-
-Open `app/models/idea.rb` and under the line
-
-{% highlight ruby %}
-class Idea < ActiveRecord::Base
-{% endhighlight %}
-
-add
-
-{% highlight ruby %}
-mount_uploader :picture, PictureUploader
-{% endhighlight %}
-
-Open `app/views/ideas/_form.html.erb` and change
-
-{% highlight erb %}
-<%= f.text_field :picture %>
-{% endhighlight %}
-
-to
-
-{% highlight erb %}
-<%= f.file_field :picture %>
-{% endhighlight %}
-
-Sometimes, you might get an *TypeError: can't cast ActionDispatch::Http::UploadedFile to string*.
-
-If this happens, in file `app/views/ideas/_form.html.erb` change the line
-
-{% highlight erb %}
-<%= form_for(@idea) do |f| %>
-{% endhighlight %}
-
-to
-
-{% highlight erb %}
-<%= form_for @idea, :html => {:multipart => true} do |f| %>
-{% endhighlight %}
-
-In your browser, add new idea with a picture. When you upload a picture it doesn't look nice because it only shows a path to the file, so let's fix that.
-
-Open `app/views/ideas/show.html.erb` and change
-
-{% highlight erb %}
-<%= @idea.picture %>
-{% endhighlight %}
-
-to
-
-{% highlight erb %}
-<%= image_tag(@idea.picture_url, :width => 600) if @idea.picture.present? %>
-{% endhighlight %}
-
-Now refresh your browser to see what changed.
-
-**Coach:** Talk a little about HTML.
-
-
-## *5.*Finetune the routes
-
-Open <http://localhost:3000> (or your preview url, if you are using a cloud service). It still shows the "Welcome aboard" page. Let's make it redirect to the ideas page.
-
-Open `config/routes.rb` and after the first line add
-
-{% highlight ruby %}
-root :to => redirect('/ideas')
-{% endhighlight %}
-
-Test the change by opening the root path (that is, <http://localhost:3000/> or your preview url) in your browser.
-
-**Coach:** Talk about routes, and include details on the order of routes and their relation to static files.
-
-**Rails 3 users:** You will need to delete the index.html from the `/public/` folder for this to work.
-
-## Create static page in your app
-
-Lets add a static page to our app that will hold information about the author of this application — you!
-
-{% highlight sh %}
-rails generate controller pages info
-{% endhighlight %}
-
-This command will create you a new folder under `app/views` called `/pages` and under that a file called `info.html.erb` which will be your info page.
-
-It also adds a new simple route to your routes.rb.
-
-{% highlight ruby %}
-get "pages/info"
-{% endhighlight %}
-
-Now you can open the file `app/views/pages/info.html.erb` and add information about you in HTML. To see your new info page, take your browser to <http://localhost:3000/pages/info> or, if you are a cloud service user, append '/pages/info' to your preview url.
-
-## *6+.*What next?
-
-* Add design using HTML &amp; CSS
-* Add ratings
-* Use CoffeeScript (or JavaScript) to add interaction
-* Add picture resizing to make loading the pictures faster
-
-
-## Additional Guides
-
-* Guide 0: [Handy cheatsheet for Ruby, Rails, console etc.](https://github.com/PragTob/rails-beginner-cheatsheet)
-* Guide 1: [Add commenting by Janika Liiv](/commenting)
-* Guide 2: [Put your app online with Heroku by Terence Lee](/heroku) / [Put your app online with OpenShift by Katie Miller](/openshift) / [Put your app online with Ninefold](/ninefold) / [Put your app online with Shelly Cloud](/shellycloud) / [Put your app online with anynines](/anynines) / [Put your app online with Trucker.io](/trucker)
-* Guide 3: [Create thumbnail images for the uploads by Miha Filej](/thumbnails)
-* Guide 4: [Add design using HTML &amp; CSS by Alex Liao](/design)
-* Guide 5: [Add Authentication (user accounts) with Devise by Piotr Steininger](/devise/)
-* Guide 6: [Adding profile pictures with Gravatar](/gravatar)
-* Guide 7: [Test your app with RSpec](/testing-rspec)
-* Guide 8: [Continuous Deployment with Travis-CI](/continuous-travis) / [Continuous Deployment with Codeship](/continuous)
-* Guide 9: [Go through additional explanations for the App by Lucy Bain](https://github.com/lbain/railsgirls)
