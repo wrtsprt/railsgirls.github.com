@@ -112,11 +112,45 @@ The welcome page you have just seen is a great example of a static HTML page ser
 
 Open the file `app/views/welcome/index.html.erb` in your text editor. What you see here is mostly the text you find on the web page. But it is filled with a couple of special words and characters. Those are called HTML tags and markup the text to tell the browser how it should layout and show the page and contained text. 
 
-Open your browser again and inspect the source code of the web page (??? instructions per OS / browser). Compare the what you see in the browser with what you see in your editor. What do you realise? Discuss with your peers and coach.
+Open your browser again and inspect the source code of the web page (??? instructions per OS / browser, which browsers add html / head automatically?). Compare the what you see in the browser with what you see in your editor. What do you realise? Discuss with your peers and coach.
 
 **Coach:** Discuss the findings.
 
-Now let's change something in the HTML of the page. Go back to your editor for that and add ??? \<good idea here\>. Be sure to save the file in your editor, head over to the browser and reload the page. 
+Now let's change something in the HTML of the page. Go back to your editor for that and add ??? \<good idea here\>. Be sure to save the file in your editor, head over to the browser and reload the page. You will see the result of what you just added immediately in your browser. 
+
+### Explore a bit of HTML 
+
+Now let's add a small list explaining the main features of our example app. This way you get to see a couple of new HTML elements. On the bottom of your welcome index page add the following code: 
+
+??? \<really good idea needed here \>
+
+{% highlight html %}
+Here you can
+<ul>
+	<li>track your todos</li>
+	<li>order them into several lists</li>
+	<li>email a todo to somone else</li>	
+</ul>.
+{% endhighlight %}
+
+
+### Got style
+
+Now you will get an idea on how styling of HTML pages basically works. So let's say we want to change the color (??? common, there must be something cooler to change, right?) of the main text to a dark grey. 
+
+In the editor surround the code except for the `<h1>`-line with those two lines. 
+Before the content: 
+
+	{% highlight html %}
+		<div id='main-content' style="color: #525252;">
+	{% endhighlight %}
+
+After the content: 
+	{% highlight html %}
+		</div>
+	{% endhighlight %}
+	
+Head over to your browser, reload and see what changed. 
 
 ## *3.*From static to dynamic
 
